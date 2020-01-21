@@ -8,7 +8,6 @@
 
 import Foundation
 // MARK: - PostsData
-// MARK: - PostsData
 struct PostsData: Codable {
     let posts: [Post]?
 
