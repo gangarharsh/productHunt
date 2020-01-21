@@ -11,10 +11,14 @@
 		3A5DE2F923D61AB2009CEA56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5DE2F823D61AB2009CEA56 /* SceneDelegate.swift */; };
 		3A5DE2FB23D61AB2009CEA56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5DE2FA23D61AB2009CEA56 /* ViewController.swift */; };
 		3A5DE2FE23D61AB2009CEA56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A5DE2FC23D61AB2009CEA56 /* Main.storyboard */; };
-		3A5DE30123D61AB2009CEA56 /* ProductHunt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A5DE2FF23D61AB2009CEA56 /* ProductHunt.xcdatamodeld */; };
 		3A5DE30323D61AB7009CEA56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5DE30223D61AB7009CEA56 /* Assets.xcassets */; };
 		3A5DE30623D61AB7009CEA56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A5DE30423D61AB7009CEA56 /* LaunchScreen.storyboard */; };
 		3A5DE31123D61AB8009CEA56 /* ProductHuntTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5DE31023D61AB8009CEA56 /* ProductHuntTests.swift */; };
+		3A5DE31F23D61E5C009CEA56 /* URLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5DE31E23D61E5C009CEA56 /* URLSession.swift */; };
+		3A5DE32223D61EE2009CEA56 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5DE32123D61EE2009CEA56 /* HomeViewModel.swift */; };
+		3A5DE32523D6297B009CEA56 /* PostAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5DE32423D6297B009CEA56 /* PostAPI.swift */; };
+		3A5DE32923D62F4E009CEA56 /* ProductHunt.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A5DE32623D62F4E009CEA56 /* ProductHunt.xcdatamodeld */; };
+		3A5DE32D23D63385009CEA56 /* PostData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5DE32C23D63385009CEA56 /* PostData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,13 +37,17 @@
 		3A5DE2F823D61AB2009CEA56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3A5DE2FA23D61AB2009CEA56 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3A5DE2FD23D61AB2009CEA56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3A5DE30023D61AB2009CEA56 /* ProductHunt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ProductHunt.xcdatamodel; sourceTree = "<group>"; };
 		3A5DE30223D61AB7009CEA56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A5DE30523D61AB7009CEA56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A5DE30723D61AB7009CEA56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A5DE30C23D61AB8009CEA56 /* ProductHuntTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProductHuntTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5DE31023D61AB8009CEA56 /* ProductHuntTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductHuntTests.swift; sourceTree = "<group>"; };
 		3A5DE31223D61AB8009CEA56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3A5DE31E23D61E5C009CEA56 /* URLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSession.swift; sourceTree = "<group>"; };
+		3A5DE32123D61EE2009CEA56 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		3A5DE32423D6297B009CEA56 /* PostAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostAPI.swift; sourceTree = "<group>"; };
+		3A5DE32723D62F4E009CEA56 /* ProductHunt.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ProductHunt.xcdatamodel; sourceTree = "<group>"; };
+		3A5DE32C23D63385009CEA56 /* PostData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,14 +89,14 @@
 		3A5DE2F523D61AB2009CEA56 /* ProductHunt */ = {
 			isa = PBXGroup;
 			children = (
-				3A5DE2F623D61AB2009CEA56 /* AppDelegate.swift */,
-				3A5DE2F823D61AB2009CEA56 /* SceneDelegate.swift */,
-				3A5DE2FA23D61AB2009CEA56 /* ViewController.swift */,
-				3A5DE2FC23D61AB2009CEA56 /* Main.storyboard */,
-				3A5DE30223D61AB7009CEA56 /* Assets.xcassets */,
-				3A5DE30423D61AB7009CEA56 /* LaunchScreen.storyboard */,
+				3A5DE32B23D6337D009CEA56 /* Model */,
+				3A5DE32023D61ED6009CEA56 /* Home */,
+				3A5DE31D23D61E3E009CEA56 /* Extension */,
+				3A5DE32323D61EEC009CEA56 /* Helper */,
+				3A5DE31C23D61E22009CEA56 /* View */,
 				3A5DE30723D61AB7009CEA56 /* Info.plist */,
-				3A5DE2FF23D61AB2009CEA56 /* ProductHunt.xcdatamodeld */,
+				3A5DE31B23D61E0A009CEA56 /* Extras */,
+				3A5DE2FA23D61AB2009CEA56 /* ViewController.swift */,
 			);
 			path = ProductHunt;
 			sourceTree = "<group>";
@@ -100,6 +108,58 @@
 				3A5DE31223D61AB8009CEA56 /* Info.plist */,
 			);
 			path = ProductHuntTests;
+			sourceTree = "<group>";
+		};
+		3A5DE31B23D61E0A009CEA56 /* Extras */ = {
+			isa = PBXGroup;
+			children = (
+				3A5DE30223D61AB7009CEA56 /* Assets.xcassets */,
+				3A5DE32623D62F4E009CEA56 /* ProductHunt.xcdatamodeld */,
+				3A5DE2F623D61AB2009CEA56 /* AppDelegate.swift */,
+				3A5DE2F823D61AB2009CEA56 /* SceneDelegate.swift */,
+			);
+			path = Extras;
+			sourceTree = "<group>";
+		};
+		3A5DE31C23D61E22009CEA56 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3A5DE2FC23D61AB2009CEA56 /* Main.storyboard */,
+				3A5DE30423D61AB7009CEA56 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3A5DE31D23D61E3E009CEA56 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				3A5DE31E23D61E5C009CEA56 /* URLSession.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		3A5DE32023D61ED6009CEA56 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3A5DE32123D61EE2009CEA56 /* HomeViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		3A5DE32323D61EEC009CEA56 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				3A5DE32423D6297B009CEA56 /* PostAPI.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		3A5DE32B23D6337D009CEA56 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3A5DE32C23D63385009CEA56 /* PostData.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,8 +263,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A5DE30123D61AB2009CEA56 /* ProductHunt.xcdatamodeld in Sources */,
+				3A5DE32923D62F4E009CEA56 /* ProductHunt.xcdatamodeld in Sources */,
+				3A5DE32D23D63385009CEA56 /* PostData.swift in Sources */,
+				3A5DE32523D6297B009CEA56 /* PostAPI.swift in Sources */,
+				3A5DE32223D61EE2009CEA56 /* HomeViewModel.swift in Sources */,
 				3A5DE2FB23D61AB2009CEA56 /* ViewController.swift in Sources */,
+				3A5DE31F23D61E5C009CEA56 /* URLSession.swift in Sources */,
 				3A5DE2F723D61AB2009CEA56 /* AppDelegate.swift in Sources */,
 				3A5DE2F923D61AB2009CEA56 /* SceneDelegate.swift in Sources */,
 			);
@@ -471,12 +535,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		3A5DE2FF23D61AB2009CEA56 /* ProductHunt.xcdatamodeld */ = {
+		3A5DE32623D62F4E009CEA56 /* ProductHunt.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				3A5DE30023D61AB2009CEA56 /* ProductHunt.xcdatamodel */,
+				3A5DE32723D62F4E009CEA56 /* ProductHunt.xcdatamodel */,
 			);
-			currentVersion = 3A5DE30023D61AB2009CEA56 /* ProductHunt.xcdatamodel */;
+			currentVersion = 3A5DE32723D62F4E009CEA56 /* ProductHunt.xcdatamodel */;
 			path = ProductHunt.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -30,5 +30,22 @@ class ProductHuntTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
+    
+    func testFetchTodaysPost(){
+        let expectation = XCTestExpectation(description: "Download failed")
+        PostsAPI.shared.fetchPost(from: .posts) { (result: Result<PostsData, PostsAPI.APIServiceError>) in
+            switch result{
+            case .success(let data):
+                XCTAssertNotNil(data, "data resceived")
+                expectation.fulfill()
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+                XCTFail()
+            }
+        }
+        wait(for: [expectation], timeout: 10.0)
+        
+    }
 
 }
