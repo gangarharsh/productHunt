@@ -27,6 +27,7 @@ class HomeViewModel {
                 switch result {
                 case .success(let data):
                     self.postsData = data
+                    DatabaseManager.deleteAllEntitiesForEntityName(name: "Posts")
                     if let posts:Posts = NSEntityDescription.insertNewObject(forEntityName: "Posts", into: DatabaseManager.managedContext) as? Posts{
                         let postsDict = try? data.asDictionary() as NSObject
                         posts.data = postsDict
@@ -39,19 +40,21 @@ class HomeViewModel {
                 }
             }
         }else{
-            let savedPosts = DatabaseManager.getEntitesForEntityName(name: "Post")
+            let savedPosts = DatabaseManager.getEntitesForEntityName(name: "Posts")
             if savedPosts.count > 0{
                 let offlinePostOnk = savedPosts.last as? Posts
-                let data = offlinePostOnk?.data
-                do {
+                if let data = offlinePostOnk?.data
+                {
+                    do {
                     let jsondecoder = JSONDecoder()
-                    self.postsData = try jsondecoder.decode(PostsData.self, from: data as! Data)
+                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                    self.postsData = try jsondecoder.decode(PostsData.self, from: jsonData as! Data)
                     self.makeDataSource()
                     self.postsReceived?()
                 } catch let error{
                     print("error \(error)")
                     self.errorFetchingPosts?()
-                }
+                }}
             }
         }
     }
