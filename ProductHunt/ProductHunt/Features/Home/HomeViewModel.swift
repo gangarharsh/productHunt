@@ -14,12 +14,14 @@ class HomeViewModel {
     typealias ErrorFetchingData = () -> ()
     typealias ShowLoader        = () -> ()
     typealias HideLoader        = () -> ()
+    typealias goToCommentsVc    = (_ viewModel:CommentsViewModel) -> ()
     
     private(set) var postsData : PostsData?
     var postsReceived: DataReceived?
     var errorFetchingPosts:ErrorFetchingData?
     var showLoader:ShowLoader?
     var hideLoader:HideLoader?
+    var goToCommentsViewController :goToCommentsVc?
     var arrayDataSource = [PostViewModel]()
     
     init() {
@@ -100,6 +102,12 @@ class HomeViewModel {
         }
     }
     
+    func gotToCommentsVc(for indexPath:IndexPath){
+        let vm = self.arrayDataSource[indexPath.row]
+        let commentsVM = CommentsViewModel(postVm: vm)
+        self.goToCommentsViewController?(commentsVM)
+    }
+    
     func makeDataSource(postsArray: [Post]?){
         self.arrayDataSource.removeAll()
         for post in postsArray ?? []{
@@ -113,11 +121,16 @@ class HomeViewModel {
     }
 }
 
+
 class PostViewModel{
-    var postObj :Post?
-    
+    private(set) var postObj :Post?
+
     init(post:Post) {
         self.postObj = post
+    }
+    
+    var postId:Int{
+        return self.postObj?.id ?? 0
     }
     
     var name:String{

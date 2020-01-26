@@ -49,6 +49,7 @@
                     <connections>
                         <outlet property="searchBar" destination="PrZ-v6-R7g" id="kKI-Cr-kwv"/>
                         <outlet property="tableviewPosts" destination="YMZ-yx-Hfa" id="PCC-JL-HnE"/>
+                        <segue destination="xtq-hl-Jng" kind="show" identifier="toCommentsView" id="fc1-jZ-jxA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -72,6 +73,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SCA-xs-3xa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="126.5625"/>
+        </scene>
+        <!--Comments View Controller-->
+        <scene sceneID="d6W-t3-ydh">
+            <objects>
+                <viewController storyboardIdentifier="CommentsViewControllerId" id="xtq-hl-Jng" customClass="CommentsViewController" customModule="ProductHunt" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dZt-5U-iTm">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="b5W-aj-EAd">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="b5W-aj-EAd" firstAttribute="top" secondItem="iJJ-r0-qCX" secondAttribute="top" id="7WH-y4-pRl"/>
+                            <constraint firstItem="iJJ-r0-qCX" firstAttribute="trailing" secondItem="b5W-aj-EAd" secondAttribute="trailing" id="jGm-y0-uiT"/>
+                            <constraint firstItem="b5W-aj-EAd" firstAttribute="leading" secondItem="iJJ-r0-qCX" secondAttribute="leading" id="kBj-05-KFu"/>
+                            <constraint firstItem="iJJ-r0-qCX" firstAttribute="bottom" secondItem="b5W-aj-EAd" secondAttribute="bottom" id="meM-wj-t5d"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="iJJ-r0-qCX"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="pk2-Ib-6GI"/>
+                    <connections>
+                        <outlet property="tableVoewComments" destination="b5W-aj-EAd" id="BaT-yC-xuE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L0P-xk-fx8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1916" y="127"/>
         </scene>
     </scenes>
 </document>

@@ -59,12 +59,48 @@ class ProductHuntTests: XCTestCase {
                 
             case .failure(let error):
                 print(error.description)
+                XCTFail()
                 expectation.fulfill()
             }
             
         }
         wait(for: [expectation], timeout: 20.0)
 
+    }
+    
+    func testComments(){
+        let expectation = XCTestExpectation(description: "Call failed")
+        PostsAPI.shared.fetchPost(from: .posts) { (result: Result<PostsData, PostsAPI.APIServiceError>) in
+            switch result{
+            case .success(let data):
+                if let postId = data.posts?.first?.id{
+                    PostsAPI.shared.fetchComments(for: postId, page: 1) { (result) in
+                        switch result
+                        {
+                        case .success(let commentsData):
+                            XCTAssertNotNil(commentsData.comments?.count ?? 0 > 0, "data found")
+                            expectation.fulfill()
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                            XCTFail()
+                            expectation.fulfill()
+                        }
+                    }
+                }else{
+                    XCTFail("first post not found")
+                }
+            case .failure(let error):
+                print(error.description)
+                XCTFail()
+                expectation.fulfill()
+
+            }
+        }
+        
+        
+        wait(for: [expectation], timeout: 30.0)
+        
+        
     }
 
 }

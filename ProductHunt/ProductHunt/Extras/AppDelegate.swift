@@ -12,9 +12,16 @@ import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    private func normalExecutionPath() -> Bool {
+        return NSClassFromString("XCTestCase") == nil
+    }
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        guard normalExecutionPath() else {
+            return false
+        }
+
         // Override point for customization after application launch.
         return true
     }

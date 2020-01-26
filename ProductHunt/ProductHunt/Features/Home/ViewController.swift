@@ -42,7 +42,6 @@ class ViewController: UIViewController {
     func setupViewModel(){
         viewModel = HomeViewModel()
         viewModel.postsReceived = { [weak self] in
-            print("Post received")
             print("viewModel.postCount \(self?.viewModel.postCount ?? 0)")
             DispatchQueue.main.async {
                 self?.tableviewPosts.isHidden = false
@@ -71,6 +70,18 @@ class ViewController: UIViewController {
             DispatchQueue.main.async {
                 self.indicator.stopAnimating()
             }
+        }
+        
+        viewModel.goToCommentsViewController = { [weak self] commemtsVM in
+            guard let `self` = self else {
+                return
+            }
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let commentsVc = storyboard.instantiateViewController(withIdentifier: "CommentsViewControllerId") as? CommentsViewController
+            {commentsVc.viewModel = commemtsVM
+                self.navigationController?.pushViewController(commentsVc, animated: true)
+            }
+
         }
     }
     
@@ -117,7 +128,6 @@ class ViewController: UIViewController {
     @objc func cancelDatePickerPressed(){
         self.view.endEditing(true)
     }
-
 }
 
 
@@ -148,6 +158,9 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.viewModel.gotToCommentsVc(for: indexPath)
+    }
 }
 
 extension ViewController : UISearchBarDelegate{

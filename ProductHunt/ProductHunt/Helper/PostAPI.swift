@@ -26,6 +26,7 @@ class PostsAPI {
     
     enum Endpoint: String, CaseIterable {
         case posts
+        case comments
     }
     
     public enum APIServiceError: Error, CustomStringConvertible {
@@ -111,5 +112,27 @@ class PostsAPI {
         }else{
             result(.failure(.invalidEndpoint))
         }
+    }
+    
+    func fetchComments(for postObjId:Int?, page:Int?, result: @escaping (Result<Comments,APIServiceError>)-> Void){
+        let endpoint = Endpoint.comments
+        let url = baseURL.appendingPathComponent(endpoint.rawValue)
+        if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),  let urlObj = urlComponents.url, let pageNumber = page, let postId = postObjId
+        {
+            var queryItems: [URLQueryItem]  = urlComponents.queryItems ??  []
+            let postId                      = URLQueryItem(name: "post_id", value: "\(postId)")
+            queryItems.append(postId)
+            let pageQuery                   = URLQueryItem(name: "per_page", value: "5")
+            queryItems.append(pageQuery)
+            let query                       = URLQueryItem(name: "page", value: "\(pageNumber)")
+            queryItems.append(query)
+            urlComponents.queryItems        = queryItems
+            fetchResources(url: urlObj, method: .get, completion: result)
+            
+        }else{
+            result(.failure(.invalidEndpoint))
+        }
+
+        
     }
 }
