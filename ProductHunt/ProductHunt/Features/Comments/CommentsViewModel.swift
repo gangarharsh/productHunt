@@ -16,19 +16,26 @@ class  CommentsViewModel{
     init(postVm :PostViewModel) {
         self.postViewModel = postVm
     }
-    
+    private var currentPage = 0
+    var shouldMakeAPI:Bool = true
     func getComments(){
-        PostsAPI.shared.fetchComments(for: self.postViewModel?.postId, page: 1) { (result) in
-            switch result
-            {
-            case .success(let commentsData):
-                self.commentsArray = commentsData
-                self.makeDataSource()
-                self.commentsReceived?()
-                break
-            case .failure(let error):
-                print(error.localizedDescription)
-                break
+        if shouldMakeAPI{
+            PostsAPI.shared.fetchComments(for: self.postViewModel?.postId, page: currentPage) { (result) in
+                switch result
+                {
+                case .success(let commentsData):
+                    self.currentPage += 1
+                    self.commentsArray = commentsData
+                    self.makeDataSource(comments: commentsData.comments ?? [])
+                    self.commentsReceived?()
+                    if commentsData.comments?.count == 0{
+                        self.shouldMakeAPI = false
+                    }
+                    break
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    break
+                }
             }
         }
     }
@@ -37,14 +44,13 @@ class  CommentsViewModel{
         return arrayDataSource.count
     }
     
-    func makeDataSource(){
+    func makeDataSource(comments:[Comment]){
         for comment in self.commentsArray.comments ?? []
         {
             let commentCellVm = CommentsCellViewModel(commet: comment)
             self.arrayDataSource.append(commentCellVm)
         }
     }
-    
 }
 
 
