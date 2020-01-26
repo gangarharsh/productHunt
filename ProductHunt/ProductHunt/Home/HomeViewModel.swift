@@ -10,20 +10,36 @@ import Foundation
 import CoreData
 
 class HomeViewModel {
-    typealias DataReceived = () -> ()
+    typealias DataReceived      = () -> ()
     typealias ErrorFetchingData = () -> ()
+    typealias ShowLoader        = () -> ()
+    typealias HideLoader        = () -> ()
+    
     private(set) var postsData : PostsData?
     var postsReceived: DataReceived?
     var errorFetchingPosts:ErrorFetchingData?
+    var showLoader:ShowLoader?
+    var hideLoader:HideLoader?
     var arrayDataSource = [PostViewModel]()
     
     init() {
         
     }
     
+    func performSearch(_ text:String){
+        let filteredPosts = self.postsData?.posts?.filter({
+            return ($0.name?.lowercased().contains(text.lowercased()) ?? true)
+        })
+        self.makeDataSource(postsArray: filteredPosts)
+        self.postsReceived?()
+    }
+    
+    
     func getPosts(){
         if Reachability.isConnectedToNetwork(){
+            self.showLoader?()
             PostsAPI.shared.fetchPost(from: .posts) { (result) in
+                self.hideLoader?()
                 switch result {
                 case .success(let data):
                     self.postsData = data
@@ -32,7 +48,7 @@ class HomeViewModel {
                         let postsDict = try? data.asDictionary() as NSObject
                         posts.data = postsDict
                         DatabaseManager.saveDbContext()
-                        self.makeDataSource()
+                        self.makeDataSource(postsArray: self.postsData?.posts)
                         self.postsReceived?()
                     }
                 case .failure(let error):
@@ -46,29 +62,54 @@ class HomeViewModel {
                 if let data = offlinePostOnk?.data
                 {
                     do {
-                    let jsondecoder = JSONDecoder()
-                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
-                    self.postsData = try jsondecoder.decode(PostsData.self, from: jsonData as! Data)
-                    self.makeDataSource()
-                    self.postsReceived?()
-                } catch let error{
-                    print("error \(error)")
-                    self.errorFetchingPosts?()
-                }}
+                        let jsondecoder = JSONDecoder()
+                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: .prettyPrinted)
+                        self.postsData = try jsondecoder.decode(PostsData.self, from: jsonData)
+                        self.makeDataSource(postsArray: self.postsData?.posts)
+                        self.postsReceived?()
+                    } catch let error{
+                        print("error \(error)")
+                        self.errorFetchingPosts?()
+                    }}
             }
         }
     }
     
-    func makeDataSource(){
+    func getPosts(forDate:Date){
+        let formatter           = DateFormatter()
+        formatter.dateFormat    = "YYYY-MM-DD"
+        let selectedDate        = forDate
+        let formattedDate       = formatter.string(from: selectedDate)
+        if Reachability.isConnectedToNetwork()
+        {
+            self.showLoader?()
+            PostsAPI.shared.fetchPostForDate(from: .posts, date: formattedDate, result: { (result) in
+                self.hideLoader?()
+                switch result {
+                case .success(let data):
+                    self.postsData = data
+                    self.makeDataSource(postsArray: self.postsData?.posts)
+                    self.postsReceived?()
+                case .failure(let error):
+                    print(error.description)
+                    
+                }
+            })
+        }else{
+            
+        }
+    }
+    
+    func makeDataSource(postsArray: [Post]?){
         self.arrayDataSource.removeAll()
-        for post in self.postsData?.posts ?? []{
+        for post in postsArray ?? []{
             let viewModel = PostViewModel(post: post)
             self.arrayDataSource.append(viewModel)
         }
     }
     
     var postCount : Int{
-        return self.postsData?.posts?.count ?? 0
+        return self.arrayDataSource.count
     }
 }
 

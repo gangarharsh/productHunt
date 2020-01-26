@@ -53,7 +53,9 @@ class PostsAPI {
         case post   = "POST"
     }
     
-    private func fetchResources<T: Decodable>(url: URL, method:RequestType,completion: @escaping (Result<T, APIServiceError>) -> Void) {
+    private func fetchResources<T: Decodable>(url: URL, method:RequestType,
+                                              completion: @escaping (Result<T, APIServiceError>) -> Void)
+    {
         guard let urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             completion(.failure(.invalidEndpoint))
             return
@@ -95,5 +97,19 @@ class PostsAPI {
     func fetchPost(from endpoint:Endpoint, result: @escaping (Result<PostsData,APIServiceError>)-> Void){
         let url = baseURL.appendingPathComponent(endpoint.rawValue)
         fetchResources(url: url, method: .get, completion: result)
+    }
+    
+    func fetchPostForDate(from endpoint:Endpoint, date:String, result: @escaping (Result<PostsData,APIServiceError>)-> Void){
+        let url = baseURL.appendingPathComponent(endpoint.rawValue)
+        if var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false),  let urlObj = urlComponents.url{
+            var queryItems: [URLQueryItem]  = urlComponents.queryItems ??  []
+            let query                       = URLQueryItem(name: "day", value: date)
+            queryItems.append(query)
+            urlComponents.queryItems        = queryItems
+            fetchResources(url: urlObj, method: .get, completion: result)
+
+        }else{
+            result(.failure(.invalidEndpoint))
+        }
     }
 }

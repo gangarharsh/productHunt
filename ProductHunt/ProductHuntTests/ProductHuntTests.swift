@@ -47,5 +47,24 @@ class ProductHuntTests: XCTestCase {
         wait(for: [expectation], timeout: 10.0)
         
     }
+    
+    func testPostOnDate(){
+        let expectation = XCTestExpectation(description: "Call failed")
+        PostsAPI.shared.fetchPostForDate(from: .posts, date: "2017-09-13") { (result) in
+            switch result{
+            case .success(let data):
+                print(data)
+                XCTAssertNotNil(data, "data resceived")
+                expectation.fulfill()
+                
+            case .failure(let error):
+                print(error.description)
+                expectation.fulfill()
+            }
+            
+        }
+        wait(for: [expectation], timeout: 20.0)
+
+    }
 
 }

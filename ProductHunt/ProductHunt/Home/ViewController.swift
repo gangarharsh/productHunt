@@ -10,40 +10,113 @@ import UIKit
 
 class ViewController: UIViewController {
     @IBOutlet weak var tableviewPosts: UITableView!
-    
+    @IBOutlet weak var searchBar: UISearchBar!
     var viewModel:HomeViewModel!
+    var datePicker : UIDatePicker!
+    let toolBar = UIToolbar()
+    private var txtField: UITextField = UITextField(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
+    let indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: .large)
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViewModel()
         self.title = "POSTS"
         tableviewPosts.delegate = self
         tableviewPosts.dataSource = self
         tableviewPosts.rowHeight = UITableView.automaticDimension
         tableviewPosts.estimatedRowHeight = 40
         tableviewPosts.register(UINib(nibName: "PostsTableViewCell", bundle: nil), forCellReuseIdentifier: "postCell")
-
-
+        tableviewPosts.isHidden = true
+        setUpIndicator()
+        setupViewModel()
+        viewModel.getPosts()
+        setUpDatePicker()
+        searchBar.delegate = self
+        searchBar.showsCancelButton = true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
     
     func setupViewModel(){
         viewModel = HomeViewModel()
-        viewModel.getPosts()
         viewModel.postsReceived = { [weak self] in
             print("Post received")
             print("viewModel.postCount \(self?.viewModel.postCount ?? 0)")
             DispatchQueue.main.async {
+                self?.tableviewPosts.isHidden = false
                 self?.tableviewPosts.reloadData()
             }
             
         }
-        viewModel.errorFetchingPosts = { [weak self] in
+        viewModel.errorFetchingPosts = {
             print("Post receive failed")
             
         }
+        
+        viewModel.showLoader = { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            DispatchQueue.main.async {
+                self.indicator.startAnimating()
+            }
+        }
+        
+        viewModel.hideLoader = { [weak self] in
+            guard let `self` = self else {
+                return
+            }
+            DispatchQueue.main.async {
+                self.indicator.stopAnimating()
+            }
+        }
     }
     
+    
+    @IBAction func filterPostForDate(_ sender: Any) {
+        self.txtField.becomeFirstResponder()
+    }
+    
+    func setUpIndicator(){
+        indicator.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        indicator.center = view.center
+        self.view.addSubview(indicator)
+        self.view.bringSubviewToFront(indicator)
+    }
+    
+    func setUpDatePicker(){
+        datePicker                       = UIDatePicker()
+        datePicker.datePickerMode        = .date
+        datePicker.maximumDate           = Date()
+        txtField.inputView               = datePicker
+        
+        let toolBar                      = UIToolbar()
+        toolBar.barStyle                 = .default
+        toolBar.isTranslucent            = true
+        let cancelButton                 = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(ViewController.cancelDatePickerPressed))
+        let space                        = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton                   = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(ViewController.doneDatePickerPressed))
+        
+        toolBar.isUserInteractionEnabled = true
+        toolBar.setItems([cancelButton,space, doneButton], animated: false)
+        toolBar.sizeToFit()
+        
+        txtField.inputAccessoryView = toolBar
+        
+        self.view.addSubview(txtField)
+    }
+    
+    @objc func doneDatePickerPressed(){
+        self.view.endEditing(true)
+        viewModel.getPosts(forDate: self.datePicker.date)
+    }
 
+    
+    @objc func cancelDatePickerPressed(){
+        self.view.endEditing(true)
+    }
 
 }
 
@@ -75,4 +148,10 @@ extension ViewController : UITableViewDelegate, UITableViewDataSource{
         return cell
     }
     
+}
+
+extension ViewController : UISearchBarDelegate{
+    func searchBar(_ searchBar: UISearchBar, textDidChange textSearched: String) {
+        viewModel.performSearch(textSearched)
+    }
 }

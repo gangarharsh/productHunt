@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A00D74723DDD7CD009C71EC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A00D74623DDD7CD009C71EC /* SceneDelegate.swift */; };
 		3A07DA9223D796EB00041651 /* imageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A07DA9123D796EB00041651 /* imageView.swift */; };
 		3A5DE2F723D61AB2009CEA56 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5DE2F623D61AB2009CEA56 /* AppDelegate.swift */; };
-		3A5DE2F923D61AB2009CEA56 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5DE2F823D61AB2009CEA56 /* SceneDelegate.swift */; };
 		3A5DE2FB23D61AB2009CEA56 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A5DE2FA23D61AB2009CEA56 /* ViewController.swift */; };
 		3A5DE2FE23D61AB2009CEA56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A5DE2FC23D61AB2009CEA56 /* Main.storyboard */; };
 		3A5DE30323D61AB7009CEA56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5DE30223D61AB7009CEA56 /* Assets.xcassets */; };
@@ -38,10 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3A00D74623DDD7CD009C71EC /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3A07DA9123D796EB00041651 /* imageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageView.swift; sourceTree = "<group>"; };
 		3A5DE2F323D61AB2009CEA56 /* ProductHunt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProductHunt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A5DE2F623D61AB2009CEA56 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3A5DE2F823D61AB2009CEA56 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		3A5DE2FA23D61AB2009CEA56 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3A5DE2FD23D61AB2009CEA56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A5DE30223D61AB7009CEA56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -124,10 +124,10 @@
 		3A5DE31B23D61E0A009CEA56 /* Extras */ = {
 			isa = PBXGroup;
 			children = (
+				3A00D74623DDD7CD009C71EC /* SceneDelegate.swift */,
 				3A5DE30223D61AB7009CEA56 /* Assets.xcassets */,
 				3A5DE32623D62F4E009CEA56 /* ProductHunt.xcdatamodeld */,
 				3A5DE2F623D61AB2009CEA56 /* AppDelegate.swift */,
-				3A5DE2F823D61AB2009CEA56 /* SceneDelegate.swift */,
 			);
 			path = Extras;
 			sourceTree = "<group>";
@@ -290,10 +290,10 @@
 				3A5DE32223D61EE2009CEA56 /* HomeViewModel.swift in Sources */,
 				3A07DA9223D796EB00041651 /* imageView.swift in Sources */,
 				3A5DE2FB23D61AB2009CEA56 /* ViewController.swift in Sources */,
+				3A00D74723DDD7CD009C71EC /* SceneDelegate.swift in Sources */,
 				3A5DE31F23D61E5C009CEA56 /* URLSession.swift in Sources */,
 				3A5DE2F723D61AB2009CEA56 /* AppDelegate.swift in Sources */,
 				3A5DE33423D77A14009CEA56 /* Reachability.swift in Sources */,
-				3A5DE2F923D61AB2009CEA56 /* SceneDelegate.swift in Sources */,
 				3A5DE33623D78004009CEA56 /* Encodable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,14 +454,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ProductHunt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ph.ProductHunt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -471,14 +474,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ProductHunt/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ph.ProductHunt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
