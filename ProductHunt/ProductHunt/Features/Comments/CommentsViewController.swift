@@ -28,7 +28,6 @@ class CommentsViewController: UIViewController {
                 return
             }
             DispatchQueue.main.async {
-                self.tableVoewComments.reloadData()
             }
         }
     }
