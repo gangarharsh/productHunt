@@ -28,9 +28,7 @@ class CommentsViewController: UIViewController {
                 return
             }
             DispatchQueue.main.async {
-                self.tableVoewComments.beginUpdates()
-                self.tableVoewComments.insertRows(at: [IndexPath(row: (self.viewModel?.commentsCount ?? 0 -  1), section: 0)], with: .automatic)
-                self.tableVoewComments.endUpdates()
+                self.tableVoewComments.reloadData()
             }
         }
     }
