@@ -36,8 +36,14 @@ class ProductHuntTests: XCTestCase {
         PostsAPI.shared.fetchPost(from: .posts) { (result: Result<PostsData, PostsAPI.APIServiceError>) in
             switch result{
             case .success(let data):
-                XCTAssertNotNil(data, "data resceived")
-                expectation.fulfill()
+                if data.posts?.count ?? 0 > 1{
+                    expectation.fulfill()
+                }else{
+                    XCTFail()
+                }
+                
+//                XCTAssertNotNil(data, "data resceived")
+//                expectation.fulfill()
                 
             case .failure(let error):
                 print(error.localizedDescription)
@@ -102,5 +108,4 @@ class ProductHuntTests: XCTestCase {
         
         
     }
-
 }
