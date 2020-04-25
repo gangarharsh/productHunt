@@ -41,6 +41,7 @@ struct Post: Codable {
     let thumbnail: Thumbnail?
     let topics: [Topic]?
     let user: User?
+    let name_test : String?
 
     enum CodingKeys: String, CodingKey {
         case commentsCount = "comments_count"
