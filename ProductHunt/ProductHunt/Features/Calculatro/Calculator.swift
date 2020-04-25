@@ -14,4 +14,11 @@ class Calculator{
         }
         return nil
     }
+    class func calculateMe(a:Any, b:Any) -> Int?{
+        if let a1 = a as? Int, let b1 = b as? Int{
+               return a1 + b1
+        }
+        return nil
+    }
 }
+
